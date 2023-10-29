@@ -44,4 +44,4 @@ const CompCreateBlog = () => {
     )
 }
 
-export default CompCreateBlog
+export default CompCreateBlog;
