@@ -1,6 +1,6 @@
-import db from "../database/db";
+import db from "../database/db.js";
 import { DataTypes } from "sequelize";
-import TeamModel from './TeamModel';
+import TeamModel from './TeamModel.js';
 
 const DriverModel=db.define("DRIVER",{
     idDriver : {
@@ -18,6 +18,9 @@ const DriverModel=db.define("DRIVER",{
     },
     code : {
         type : DataTypes.CHAR
+    },
+    number : {
+        type : DataTypes.INTEGER
     },
     idTeam : {
         type : DataTypes.INTEGER,
