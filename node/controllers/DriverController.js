@@ -1,4 +1,6 @@
 import DriverModel from '../models/DriverModel.js';
+import multer from 'multer';
+import path from 'path';
 
 export const getDrivers=async(req,res)=>{
     try{
@@ -8,6 +10,50 @@ export const getDrivers=async(req,res)=>{
         res.json({message : error.message});
     }
 }
+
+
+export const updateDriver = async (req, res) => {
+  try {
+
+    const storage = multer.diskStorage({
+      destination: 'public/images',
+      filename: (req, file, cb) => {
+        const fileExtension = path.extname(file.originalname);
+        const uniqueFileName = `${Date.now()}${fileExtension}`;
+        cb(null, uniqueFileName);
+      },
+    });
+
+    const upload = multer({ storage: storage });
+
+    upload.single('image')(req, res, async (err) => {
+      if (err) {
+        return res.json({ message: err.message });
+      }
+
+      if (!req.file) {
+        return res.json({ message: 'El fichero no se ha guardado' });
+      }
+
+      const newImageFilename = req.file.filename;
+      const driverId = req.body.idDriver; 
+      console.log(driverId);
+
+      try {
+        await DriverModel.update(
+          { imagen: newImageFilename },
+          { where: { idDriver: driverId } }
+        );
+          res.json("Imagen Guardada correctamente")
+        
+      } catch (error) {
+        res.json({ message: error.message });
+      }
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
 
 export const getDriverFromID = async (req, res) => {
     try {

@@ -24,6 +24,9 @@ const DriverModel=db.define("DRIVER",{
     number : {
         type : DataTypes.INTEGER
     },
+    imagen : {
+        type : DataTypes.STRING
+    },
     idTeam : {
         type : DataTypes.INTEGER,
         references : {

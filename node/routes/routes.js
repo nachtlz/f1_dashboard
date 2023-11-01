@@ -1,5 +1,5 @@
 import express from 'express'
-import { getDriverFromID, getDrivers } from '../controllers/DriverController.js'
+import { getDriverFromID, getDrivers, updateDriver } from '../controllers/DriverController.js'
 import { getCircuitFormId, getCircuits } from '../controllers/Circuitcontroller.js';
 import { getTeamFromID, getTeams } from '../controllers/TeamController.js';
 import { getCircuitFromRace, getRaceFromId, getRaces } from '../controllers/RaceController.js';
@@ -9,6 +9,7 @@ const router = express.Router()
 // Routting Drivers
 router.get('/driver/returnAll',getDrivers);
 router.get('/driver/getDriverFromID/:idDriver',getDriverFromID);
+router.post('/driver/update',updateDriver);
 
 // Routting Circuit
 router.get('/circuit/returnAll',getCircuits);

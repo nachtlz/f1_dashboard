@@ -3,7 +3,7 @@ import './App.css';
 
 //importamos los componentes
 import CompShowBlogs from './blog/ShowBlogs';
-import CompCreateBlog from './blog/CreateBlog';
+import AddImage from './blog/AddImage';
 import CompEditBlog from './blog/EditBlog';
 
 //importamos el router
@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path='/' element={ <CompShowBlogs />} />
-            <Route path='/create' element={ <CompCreateBlog />} />
+            <Route path='/create' element={ <AddImage />} />
             <Route path='/edit/:id' element={ <CompEditBlog />} />
         </Routes>
       </BrowserRouter>
