@@ -8,5 +8,8 @@ const Team = db.define('TEAM', {
     },
     name: { type: DataTypes.STRING },
     nationality: { type: DataTypes.STRING }
+},{
+    tableName : 'TEAM',
+    timestamps : false
 })
 export default Team;

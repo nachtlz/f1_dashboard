@@ -4,7 +4,8 @@ import { DataTypes } from "sequelize";
 const CircuitModel = db.define("CIRCUIT", {
     idCircuit: {
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement : false
     },
     name: { type: DataTypes.STRING },
     laps: { type: DataTypes.INTEGER },

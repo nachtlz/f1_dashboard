@@ -8,3 +8,15 @@ export const getDrivers=async(req,res)=>{
         res.json({message : error.message});
     }
 }
+
+export const getDriverFromID = async (req, res) => {
+    try {
+        const result = await DriverModel.findOne({
+            where: { idDriver: req.params.idDriver }
+        });
+        res.json(result);
+
+    } catch (error) {
+        res.json({ meesage: error.message })
+    }
+}

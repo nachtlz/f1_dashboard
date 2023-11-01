@@ -5,7 +5,9 @@ import TeamModel from './TeamModel.js';
 const DriverModel=db.define("DRIVER",{
     idDriver : {
         type : DataTypes.INTEGER,
-        primaryKey : true
+        primaryKey : true,
+        autoIncrement : false
+
     },
     name : {
         type : DataTypes.STRING
