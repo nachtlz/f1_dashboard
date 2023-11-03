@@ -7,7 +7,8 @@ const Team = db.define('TEAM', {
         primaryKey: true
     },
     name: { type: DataTypes.STRING },
-    nationality: { type: DataTypes.STRING }
+    nationality: { type: DataTypes.STRING },
+    imagen : {type : DataTypes.STRING}
 },{
     tableName : 'TEAM',
     timestamps : false
