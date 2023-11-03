@@ -53,7 +53,7 @@ const AddImage = () => {
                             <option value="">Select Driver</option>
                             {drivers.map((driver) => (
                                 <option key={driver.idDriver} value={driver.idDriver}>
-                                    {driver.name + ' ' + driver.lastName}
+                                    {driver.name + ' ' + driver.lastname}
                                 </option>
                             ))}
                         </select>
