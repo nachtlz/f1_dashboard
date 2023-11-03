@@ -1,9 +1,9 @@
 import express from 'express'
 import { getDriverFromID, getDrivers, updateDriver } from '../controllers/DriverController.js'
-import { getCircuitFormId, getCircuits } from '../controllers/Circuitcontroller.js';
+import { getCircuitFormId, getCircuits } from '../controllers/CircuitController.js';
 import { getTeamFromID, getTeams } from '../controllers/TeamController.js';
 import { getCircuitFromRace, getRaceFromId, getRaces } from '../controllers/RaceController.js';
-import { getResultFromDriver, getStatusRace } from '../controllers/Resultcontroller.js';
+import { getResultFromDriver, getStatusRace } from '../controllers/ResultController.js';
 const router = express.Router()
 
 // Routting Drivers
