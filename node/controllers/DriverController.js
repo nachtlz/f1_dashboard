@@ -16,7 +16,7 @@ export const updateDriver = async (req, res) => {
   try {
 
     const storage = multer.diskStorage({
-      destination: 'public/images',
+      destination: 'public/imagesDriver',
       filename: (req, file, cb) => {
         const fileExtension = path.extname(file.originalname);
         const uniqueFileName = `${Date.now()}${fileExtension}`;

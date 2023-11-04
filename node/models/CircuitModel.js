@@ -10,7 +10,8 @@ const CircuitModel = db.define("CIRCUIT", {
     name: { type: DataTypes.STRING },
     laps: { type: DataTypes.INTEGER },
     location: { type: DataTypes.STRING },
-    country: { type: DataTypes.STRING }
+    country: { type: DataTypes.STRING },
+    imagen : {type : DataTypes.STRING}
 }, {
     tableName: "CIRCUIT",
     timestamps: false

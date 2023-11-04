@@ -1,4 +1,6 @@
 import CircuitModel from '../models/CircuitModel.js'
+import multer from 'multer';
+import path from 'path';
 export const getCircuits = async (req, res) => {
     try {
         const result = await CircuitModel.findAll();
@@ -18,3 +20,46 @@ export const getCircuitFormId = async (req, res) => {
         res.json({ meesage: error.message })
     }
 }
+
+export const updateCircuit = async (req, res) => {
+    try {
+  
+      const storage = multer.diskStorage({
+        destination: 'public/images',
+        filename: (req, file, cb) => {
+          const fileExtension = path.extname(file.originalname);
+          const uniqueFileName = `${Date.now()}${fileExtension}`;
+          cb(null, uniqueFileName);
+        },
+      });
+  
+      const upload = multer({ storage: storage });
+  
+      upload.single('image')(req, res, async (err) => {
+        if (err) {
+          return res.json({ message: err.message });
+        }
+  
+        if (!req.file) {
+          return res.json({ message: 'El fichero no se ha guardado' });
+        }
+  
+        const newImageFilename = req.file.filename;
+        const circuitID = req.body.idCircuit; 
+        console.log(circuitID);
+  
+        try {
+          await CircuitModel.update(
+            { imagen: newImageFilename },
+            { where: { idCircuit: circuitID } }
+          );
+            res.json("Imagen Guardada correctamente")
+          
+        } catch (error) {
+          res.json({ message: error.message });
+        }
+      });
+    } catch (error) {
+      res.json({ message: error.message });
+    }
+  };
