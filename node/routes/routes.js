@@ -16,11 +16,11 @@ router.get('/circuit/returnAll',getCircuits);
 router.get('/circuit/getCircuitFromId/:idCircuit',getCircuitFormId)
 
 // Routting Team
-router.get('/team/getTeams',getTeams);
+router.get('/team/returnAll',getTeams);
 router.get('/team/getTeamFromId/:idTeam',getTeamFromID);
 
 // Routting Race
-router.get('/race/getRaces',getRaces);
+router.get('/race/returnAll',getRaces);
 router.get('/race/getRaceFromId/:idRace',getRaceFromId);
 router.get('/race/getCircuitFromRace/:idRace',getCircuitFromRace);
 

@@ -8,17 +8,63 @@ const PrincipalChart = () => {
 
     const [drivers, setDrivers] = useState([]);
     const [races, setRaces] = useState([]);
+    const [driverResults, setDriverResults] = useState([]);
+    let results = [];
 
     const getDrivers = async () => {
         try {
-            const resp = (await axios.get(URI + 'driver/returnAll'))
+            const resp = await axios.get(URI + 'driver/returnAll')
             setDrivers(resp.data)
+            createSeries(resp.data)
         } catch (error) {
             console.log("Error al cargar los datos", error)
         }
     }
 
-    useEffect(() => {
+    const getRaces = async () => {
+        try {
+            const resp = await axios.get(URI + 'race/returnAll')
+            setRaces(resp.data.map((race) => {
+                return race.name
+            }))
+        } catch (error) {
+            console.log("Error al cargar los datos", error)
+        }
+    }
+
+    const getResultsFromDriver = async (idDriver) => {
+        try {
+            const resp = await axios.get(URI + 'result/getResultFromDriver/' + idDriver)
+            setDriverResults(resp.data)
+            return resp.data
+        } catch (error) {
+            console.log("Error al cargar los datos", error)
+        }
+    }
+
+    const createSeries = async (driverList) => {
+        const promises = driverList.map(async (driver) => {
+            let data = calculateRacePoints(await getResultsFromDriver(driver.idDriver))
+            results.push({ name: driver.name + ' ' + driver.lastname, data: data });
+        })
+
+        await Promise.all(promises);
+
+        results = results.filter((result) => result.data.length === 22)
+        createChart(results)
+        console.log(results)
+    }
+
+    function calculateRacePoints(points) {
+        let sum = 0;
+        const data = points.map((p) => {
+          sum += (p.points === null ? 0 : p.points);
+          return sum;
+        });
+        return data;
+    }
+
+    function createChart(resultsData) {
         Highcharts.chart('container', {
 
             title: {
@@ -41,7 +87,8 @@ const PrincipalChart = () => {
                 title: {
                     text: 'Races'
                 },
-                categories: ['2010', '2011']
+                categories: races
+                //categories: ['Race ', 'Race 2', 'Race 3', 'Race 4', 'Race 5', 'Race 6', 'Race 7', 'Race 8', 'Race 9', 'Race 10', 'Race 11']
             },
         
             legend: {
@@ -55,31 +102,13 @@ const PrincipalChart = () => {
                     label: {
                         connectorAllowed: false
                     },
-                    pointStart: 2010
                 }
             },
         
-            series: [{
-                name: 'Installation & Developers',
-                data: [43934, 48656, 65165, 81827, 112143, 142383,
-                    171533, 165174, 155157, 161454, 154610]
-            }, {
-                name: 'Manufacturing',
-                data: [24916, 37941, 29742, 29851, 32490, 30282,
-                    38121, 36885, 33726, 34243, 31050]
-            }, {
-                name: 'Sales & Distribution',
-                data: [11744, 30000, 16005, 19771, 20185, 24377,
-                    32147, 30912, 29243, 29213, 25663]
-            }, {
-                name: 'Operations & Maintenance',
-                data: [null, null, null, null, null, null, null,
-                    null, 11164, 11218, 10077]
-            }, {
-                name: 'Other',
-                data: [21908, 5548, 8105, 11248, 8989, 11816, 18274,
-                    17300, 13053, 11906, 10073]
-            }],
+            series: resultsData.map(result => ({
+                name: result.name,
+                data: result.data
+            })),
         
             responsive: {
                 rules: [{
@@ -93,17 +122,27 @@ const PrincipalChart = () => {
                             verticalAlign: 'bottom'
                         }
                     },
-                    credits: {
-                        enabled: false
-                    },
                 }]
-            }
-            
+            },
+
+            credits: {
+                enabled: false
+            } 
         })
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await Promise.all([getDrivers(), getRaces()]);
+        };
+        fetchData()
+
+        console.log(results)
+        
     }, []);
 
     return (
-        <div id="container" style={{margin: '50px'}}></div>
+        <div id="container" style={{margin: '20px'}}></div>
     )
 }
 
