@@ -17,12 +17,12 @@ router.get('/circuit/getCircuitFromId/:idCircuit',getCircuitFormId)
 router.post('/circuit/update',updateCircuit);
 
 // Routting Team
-router.get('/team/getTeams',getTeams);
+router.get('/team/returnAll',getTeams);
 router.get('/team/getTeamFromId/:idTeam',getTeamFromID);
 router.post('/team/update',updateTeam)
 
 // Routting Race
-router.get('/race/getRaces',getRaces);
+router.get('/race/returnAll',getRaces);
 router.get('/race/getRaceFromId/:idRace',getRaceFromId);
 router.get('/race/getCircuitFromRace/:idRace',getCircuitFromRace);
 
