@@ -25,6 +25,7 @@ export const getResultFromDriver = async (req, res) => {
 
         // Formatear la respuesta para seleccionar solo puntos y nombre del circuito
         const formattedResults = results.map(result => ({
+            idRace: result.RACE.idRace,
             points: result.points,
             name: result.RACE.CIRCUIT.name,
         }));

@@ -1,4 +1,3 @@
-import logo from './f1_logo.svg';
 import './App.css';
 
 //importamos los componentes
@@ -9,7 +8,7 @@ import Races from './components/Races';
 
 //importamos el router
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PrincipalChart from './components/PrincipalChart';
+import Home from './components/Home';
 
 
 function App() {
@@ -18,12 +17,12 @@ function App() {
       <NavBar/>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={ <Home />} />
             <Route path='/create' element={ <AddImage />} />
             <Route path='/drivers' element={ <Drivers />} />
             <Route path='/races' element={ <Races />} />
         </Routes>
       </BrowserRouter>
-      <PrincipalChart/>
     </div>
   );
 }

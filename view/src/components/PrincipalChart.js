@@ -24,9 +24,11 @@ const PrincipalChart = () => {
     const getRaces = async () => {
         try {
             const resp = await axios.get(URI + 'race/returnAll')
-            setRaces(resp.data.map((race) => {
+            const racesName = resp.data.map((race) => {
                 return race.name
-            }))
+            })
+            return racesName
+            
         } catch (error) {
             console.log("Error al cargar los datos", error)
         }
@@ -47,12 +49,11 @@ const PrincipalChart = () => {
             let data = calculateRacePoints(await getResultsFromDriver(driver.idDriver))
             results.push({ name: driver.name + ' ' + driver.lastname, data: data });
         })
-
+        const racesData = await getRaces();
         await Promise.all(promises);
 
         results = results.filter((result) => result.data.length === 22)
-        createChart(results)
-        console.log(results)
+        createChart(results, racesData)
     }
 
     function calculateRacePoints(points) {
@@ -64,7 +65,7 @@ const PrincipalChart = () => {
         return data;
     }
 
-    function createChart(resultsData) {
+    function createChart(resultsData, racesData) {
         Highcharts.chart('container', {
 
             title: {
@@ -84,11 +85,7 @@ const PrincipalChart = () => {
             },
         
             xAxis: {
-                title: {
-                    text: 'Races'
-                },
-                categories: races
-                //categories: ['Race ', 'Race 2', 'Race 3', 'Race 4', 'Race 5', 'Race 6', 'Race 7', 'Race 8', 'Race 9', 'Race 10', 'Race 11']
+                categories: racesData
             },
         
             legend: {
@@ -113,7 +110,7 @@ const PrincipalChart = () => {
             responsive: {
                 rules: [{
                     condition: {
-                        maxWidth: 500
+                        maxWidth: 600
                     },
                     chartOptions: {
                         legend: {
@@ -124,7 +121,6 @@ const PrincipalChart = () => {
                     },
                 }]
             },
-
             credits: {
                 enabled: false
             } 
