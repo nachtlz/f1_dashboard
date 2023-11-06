@@ -1,4 +1,5 @@
 import CircuitModel from '../models/CircuitModel.js';
+import DriverModel from '../models/DriverModel.js';
 import RaceModel from '../models/RaceModel.js';
 import ResultModel from '../models/ResultModel.js'
 
@@ -32,6 +33,22 @@ export const getResultFromDriver = async (req, res) => {
         res.json(formattedResults);
     } catch (error) {
         res.json({ message: error.message });
+    }
+}
+export const getResultFromRace=async(req,res)=>{
+    try{
+        const result= await ResultModel.findAll({
+            include : {
+                model : DriverModel,
+                attributes : ['name','lastName'],
+                required : true
+            },
+            where : {idRace : req.params.idRace},
+            order: [['points', 'desc']],
+        })
+        res.json(result);
+    }catch(error){
+        res.json({message : error.message});
     }
 }
 

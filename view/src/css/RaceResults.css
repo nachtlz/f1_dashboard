@@ -1,0 +1,29 @@
+#TitleRace{
+    margin-top: 1rem;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#TitleRace h1{
+    font-size: 2.5rem;
+}
+#infoCircuit  {
+    background-color: #efece3; 
+}
+.textInfo{
+    margin-top: 1rem;
+}
+.textInfo ul {
+    list-style: none; 
+}
+  
+  .textInfo ul li {
+    margin-bottom: 10px; 
+  }
+  
+  .textInfo ul li p {
+    display: flex;
+    align-items: center;
+  }
+  #viewResult{
+    cursor: pointer;
+    text-decoration: underline;
+  }
