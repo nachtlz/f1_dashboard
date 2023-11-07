@@ -9,7 +9,7 @@ const Races = () => {
     const [circuits, setCircuits] = useState([]);
 
     const handleCardClick=(circuitID)=>{
-        window.location.href = `/raceResult/${circuitID}`;
+        window.location.href = `/races/${circuitID}`;
     };
 
     const getCircuits = async () => {

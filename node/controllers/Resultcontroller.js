@@ -67,4 +67,27 @@ export const getStatusRace=async(req,res)=>{
     }catch(error){
         res.json({message : error.message});
     }
+};
+export const getStatusFromRace=async(req,res)=>{
+    try{
+        const results=await ResultModel.count({
+            include :{
+                model : RaceModel,
+                attributes:['name'],
+                required : true
+            },
+            where :{idRace : req.params.idRace},
+            group : ['idRace','RACE.name','status'],
+
+        });
+        const formattedResults = results.map(result => ({
+            status: result.status,
+            count: result.count,
+        }));
+        res.json(formattedResults);
+
+    }catch(error){
+        res.json({message : error.message});
+    }
+
 }

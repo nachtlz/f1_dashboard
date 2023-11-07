@@ -23,7 +23,7 @@ function App() {
             <Route path='/create' element={ <AddImage />} />
             <Route path='/drivers' element={ <Drivers />} />
             <Route path='/races' element={ <Races />} />
-            <Route path='/raceResult/:idCircuit' element={<RaceResults />}/>
+            <Route path='/races/:idCircuit' element={<RaceResults />}/>
         </Routes>
       </BrowserRouter>
     </div>

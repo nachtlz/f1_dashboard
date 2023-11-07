@@ -3,7 +3,7 @@ import { getDriverFromID, getDrivers, updateDriver } from '../controllers/Driver
 import { getCircuitFormId, getCircuits, updateCircuitReal, updateCircuit } from '../controllers/Circuitcontroller.js';
 import { getTeamFromID, getTeams, updateTeam } from '../controllers/TeamController.js';
 import { getCircuitFromRace, getRaceAndCircuit, getRaceAndCircuitFromCircuit, getRaceFromId, getRaces } from '../controllers/RaceController.js';
-import { getResultFromDriver, getResultFromRace, getStatusRace } from '../controllers/ResultController.js';
+import { getResultFromDriver, getResultFromRace, getStatusFromRace, getStatusRace } from '../controllers/ResultController.js';
 const router = express.Router()
 
 // Routting Drivers
@@ -34,4 +34,5 @@ router.get('/race/getRaceAndCircuitFromCircuit/:idCircuit',getRaceAndCircuitFrom
 router.get('/result/getResultFromDriver/:idDriver',getResultFromDriver);
 router.get('/result/getResultFromRace/:idRace',getResultFromRace);
 router.get('/result/getStatusRace',getStatusRace);
+router.get('/result/getStatusFromRace/:idRace',getStatusFromRace);
 export default router
