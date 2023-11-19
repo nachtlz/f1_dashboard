@@ -184,7 +184,11 @@ const DriverPoints = () => {
                             <p className="card-text">{team.name} <img src={require(`../../../node/public/imagesTeam/${team.imagen}`)} style={{width: '30px'}} alt="Driver photo"></img></p>
                         </div>
                         <ul className="driverData">
-                            <li className="list-group-item">{driver.number}</li>
+                            <li className="list-group-item">
+                                <div className="driverNumber">
+                                    {driver.number}
+                                </div>
+                            </li>
                             <li className="list-group-item">{driver.code}</li>
                             <li className="list-group-item">{driver.nationality}</li>
                         </ul>

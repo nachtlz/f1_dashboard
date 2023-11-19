@@ -140,3 +140,40 @@
   justify-content: space-evenly;
   font-weight: bold;
 }
+
+.driverNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color:rgb(3, 61, 61);
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
+}
+
+.driverCardNumberImg {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.cardNumber {
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 40px;
+  color: black;
+}
+
+.driverNameCard {
+  margin: 0;
+  padding: 0;
+  height: 10px;
+}
+
+.fondoImagen {
+  background-image: url("/../node/public/imagesDriver/fondo.jpg");
+}
