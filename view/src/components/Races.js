@@ -42,7 +42,7 @@ const Races = () => {
                                 <div className="card-body">
                                     <h5 className="card-title" id="card-title">{circuit.nameCircuit}</h5>
                                 </div>
-                                <ul className="list-group list-group-flush">
+                                <ul className="list-group list-group-flush" id="card-nameRace">
                                     <li className="list-group-item">{circuit.nameRace}</li>
                                 </ul>
                             </div>

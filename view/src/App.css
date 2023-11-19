@@ -52,6 +52,11 @@
   border: 2px solid black;
   box-shadow: 0 2px 4px black;
   height: 100%;
+  background-image: url('../../node/public/imagenesCircuit/circuit/fondoCarta.jpg');
+  background-size :cover;
+  background-position :bottom;
+  background-repeat: no-repeat;
+
   
 }
 #card:hover {
@@ -69,6 +74,7 @@
   height: auto;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  
 }
 
 .card-body {
@@ -85,6 +91,16 @@
 .list-group-item {
   font-size: 1rem;
   color: #666;
+}
+
+.list-group li{
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#card-nameRace{
+  border-top: none;
 }
 
 .container {
