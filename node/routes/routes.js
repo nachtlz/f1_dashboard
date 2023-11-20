@@ -1,14 +1,15 @@
 import express from 'express'
-import { getDriverFromID, getDrivers, updateDriver } from '../controllers/DriverController.js'
+import { getCountryDriver, getDriverFromID, getDrivers, updateDriver } from '../controllers/DriverController.js'
 import { getCircuitFormId, getCircuits, updateCircuitReal, updateCircuit } from '../controllers/Circuitcontroller.js';
 import { getTeamFromID, getTeams, updateTeam } from '../controllers/TeamController.js';
 import { getCircuitFromRace, getRaceAndCircuit, getRaceAndCircuitFromCircuit, getRaceFromId, getRaces } from '../controllers/RaceController.js';
-import { getResultFromDriver, getResultFromRace, getStatusFromRace, getStatusRace } from '../controllers/ResultController.js';
+import { getResultFromDriver, getResultFromRace, getStatusFromRace, getStatusRace, getWinTeam } from '../controllers/ResultController.js';
 const router = express.Router()
 
 // Routting Drivers
 router.get('/driver/returnAll',getDrivers);
 router.get('/driver/getDriverFromID/:idDriver',getDriverFromID);
+router.get('/driver/getCountry',getCountryDriver);
 router.post('/driver/update',updateDriver);
 
 // Routting Circuit
@@ -21,6 +22,7 @@ router.post('/circuit/update/circuit',updateCircuit);
 // Routting Team
 router.get('/team/returnAll',getTeams);
 router.get('/team/getTeamFromId/:idTeam',getTeamFromID);
+router.get('/team/getWinTeam',getWinTeam);
 router.post('/team/update',updateTeam)
 
 // Routting Race

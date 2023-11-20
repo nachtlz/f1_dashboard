@@ -2,6 +2,8 @@ import CircuitModel from '../models/CircuitModel.js';
 import DriverModel from '../models/DriverModel.js';
 import RaceModel from '../models/RaceModel.js';
 import ResultModel from '../models/ResultModel.js'
+import Team from '../models/TeamModel.js';
+import { Sequelize as sequelize  } from 'sequelize';
 
 export const getResultFromDriver = async (req, res) => {
     try {
@@ -91,3 +93,36 @@ export const getStatusFromRace=async(req,res)=>{
     }
 
 }
+
+export const getWinTeam = async (req, res) => {
+    try {
+      const result = await ResultModel.findAll({
+        attributes: [
+          [sequelize.fn('COUNT', sequelize.col('Driver.Team.name')), 'count'],
+          [sequelize.col('Driver.Team.name'), 'teamName'], // Agrega esta línea
+        ],
+        include: [
+          {
+            model: DriverModel,
+            attributes: [],
+            include: [
+              {
+                model: Team,
+                attributes: ['name'],
+              },
+            ],
+          },
+        ],
+        where: {
+          position: 1,
+        },
+        group: ['teamName','DRIVER.TEAM.idTeam'], // Ajusta la cláusula GROUP BY
+        order: [[sequelize.literal('count'), 'DESC']],
+      });
+  
+      res.json({ totalWins: result });
+    } catch (error) {
+      res.json({ message: error.message });
+    }
+  };
+  
