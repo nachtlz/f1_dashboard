@@ -64,6 +64,41 @@ const PrincipalChart = () => {
         });
         return data;
     }
+    const getTeamWiners = async () => {
+        try {
+          const resp = await axios.get(URI + 'team/getWinTeam');
+          console.log(resp.data);
+          calculatePercentTeam(Object.values(resp.data));
+      
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      
+      function calculatePercentTeam(resp) {
+        console.log(resp);
+        const _data = resp[0].map((result) => {
+            console.log(result);
+            const teamName = result.teamName;
+            const percent = ((result.count / 22) * 100);
+            return { team: teamName, percent };
+          
+        });
+          console.log(_data);
+          createPie(_data);
+        
+      };
+      const getNationality = async () => {
+        try {
+          const resp = await axios.get(URI + 'driver/getCountry');
+          console.log(resp.data);
+          createColumnChart(resp.data);
+      
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      
 
     function createChart(resultsData, racesData) {
         Highcharts.chart('container', {
@@ -127,9 +162,98 @@ const PrincipalChart = () => {
         })
     }
 
+    function createPie(_data){
+        Highcharts.chart('container-pie', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Races won by team'
+            },
+            tooltip: {
+                valueSuffix: '%'
+            },
+            
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: [{
+                        enabled: true,
+                        distance: 20
+                    }, {
+                        enabled: true,
+                        distance: -40,
+                        format: '{point.percentage:.1f}%',
+                        style: {
+                            fontSize: '1.2em',
+                            textOutline: 'none',
+                            opacity: 0.7
+                        },
+                        filter: {
+                            operator: '>',
+                            property: 'percentage',
+                            value: 10
+                        }
+                    }]
+                }
+            },
+            series: [
+                {
+                    name: 'Percentage',
+                    colorByPoint: true,
+                    data: _data.map((info) => {
+                        return {
+                            name: info.team,
+                            y: info.percent
+                        };
+                    })                    
+                }
+            ]
+        });
+        
+    }
+    function createColumnChart(infoData) {
+        Highcharts.chart('container-country', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Drivers Nationality',
+                align: 'center'
+            },
+          
+            xAxis: {
+                categories: infoData.map(result => result.nationality),
+                crosshair: true,
+                accessibility: {
+                    description: 'Drivers'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Num Drivers'
+                }
+            },
+
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Num Drivers',
+                data: infoData.map(resp => resp.count)
+            }]
+        });
+
+    }
+
     useEffect(() => {
         const fetchData = async () => {
-            await Promise.all([getDrivers(), getRaces()]);
+            await Promise.all([getDrivers(), getRaces(),getTeamWiners(),getNationality()]);
         };
         fetchData()
 
@@ -138,7 +262,29 @@ const PrincipalChart = () => {
     }, []);
 
     return (
-        <div id="container" style={{margin: '20px'}}></div>
+        <div className="container-fluid">
+
+            <div className="container" style={{marginTop : '5rem'}}>
+                <h1 className="title-dashboard">Formula 1 Dashboard Season 2020-2021</h1>
+            </div>
+
+            <div className="container" style={{marginTop : '4rem'}}>
+                <div id="container" style={{margin: '20px'}}></div>
+            </div>
+            <div className="container text-center" style={{marginTop : '3rem'}}>
+                <div className="row">
+                    <div className="col" id="container-pie">
+                    </div>
+                    <div className="col" id="container-country">
+                    </div>
+                </div>
+            </div>
+            
+
+
+
+
+        </div>
     )
 }
 

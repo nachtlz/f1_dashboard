@@ -1,6 +1,8 @@
 import TeamModel from '../models/TeamModel.js';
 import multer from 'multer';
 import path from 'path';
+import DriverModel from '../models/DriverModel.js';
+import ResultModel from '../models/ResultModel.js';
 export const getTeams = async (req, res) => {
     try {
         const result=await TeamModel.findAll();
@@ -61,4 +63,5 @@ export const updateTeam = async (req, res) => {
     } catch (error) {
       res.json({ message: error.message });
     }
+
   };

@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import CircuitModel from '../models/CircuitModel.js';
 import RaceModel from '../models/RaceModel.js';
 
@@ -38,6 +39,8 @@ export const getCircuitFromRace = async(req,res)=>{
             laps: result.CIRCUIT.laps,
             location: result.CIRCUIT.location,
             country: result.CIRCUIT.country,
+            imagenReal : result.CIRCUIT.imagenReal,
+            imagenCircuit : result.CIRCUIT.imagenCircuit,
         };
         res.json(formattedResult);
 
@@ -45,3 +48,64 @@ export const getCircuitFromRace = async(req,res)=>{
         res.json({message : error.message});
     }
 }
+
+export const getRaceAndCircuitFromCircuit = async (req, res) => {
+    try {
+      const results = await RaceModel.findAll({
+        include: CircuitModel,
+        required: true,
+        where : {idCircuit : req.params.idCircuit}
+      });
+  
+      if (results.length > 0) {
+        const formattedResults = results.map((result) => ({
+          idRace : result.idRace,
+          nameRace: result.name,
+          dateRace: result.date,
+          idCircuit : result.CIRCUIT.idCircuit,
+          nameCircuit: result.CIRCUIT.name,
+          laps: result.CIRCUIT.laps,
+          location: result.CIRCUIT.location,
+          country: result.CIRCUIT.country,
+          imagenReal: result.CIRCUIT.imagenReal,
+          imagenCircuit: result.CIRCUIT.imagenCircuit,
+        }));
+  
+        res.json(formattedResults);
+      } else {
+        res.json({ message: "No se encontraron resultados" });
+      }
+    } catch (error) {
+      res.json({ message: error.message });
+    }
+  };
+  
+  export const getRaceAndCircuit = async (req, res) => {
+    try {
+      const results = await RaceModel.findAll({
+        include: CircuitModel,
+        required: true,
+      });
+  
+      if (results.length > 0) {
+        const formattedResults = results.map((result) => ({
+          idRace : result.idRace,
+          nameRace: result.name,
+          dateRace: result.date,
+          idCircuit : result.CIRCUIT.idCircuit,
+          nameCircuit: result.CIRCUIT.name,
+          laps: result.CIRCUIT.laps,
+          location: result.CIRCUIT.location,
+          country: result.CIRCUIT.country,
+          imagenReal: result.CIRCUIT.imagenReal,
+          imagenCircuit: result.CIRCUIT.imagenCircuit,
+        }));
+  
+        res.json(formattedResults);
+      } else {
+        res.json({ message: "No se encontraron resultados" });
+      }
+    } catch (error) {
+      res.json({ message: error.message });
+    }
+  };

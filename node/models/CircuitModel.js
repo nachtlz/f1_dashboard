@@ -5,12 +5,14 @@ const CircuitModel = db.define("CIRCUIT", {
     idCircuit: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement : false
+        autoIncrement: false
     },
     name: { type: DataTypes.STRING },
     laps: { type: DataTypes.INTEGER },
     location: { type: DataTypes.STRING },
-    country: { type: DataTypes.STRING }
+    country: { type: DataTypes.STRING },
+    imagenReal: { type: DataTypes.STRING },
+    imagenCircuit: { type: DataTypes.STRING }
 }, {
     tableName: "CIRCUIT",
     timestamps: false

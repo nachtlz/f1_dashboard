@@ -10,6 +10,7 @@ import DriverPoints from './components/DriverPoints';
 //importamos el router
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
+import RaceResults from './components/RaceResults';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path='/drivers' element={ <Drivers />} />
             <Route path='/drivers/:idDriver' element={ <DriverPoints />} />
             <Route path='/races' element={ <Races />} />
+            <Route path='/races/:idCircuit' element={<RaceResults />}/>
         </Routes>
       </BrowserRouter>
     </div>

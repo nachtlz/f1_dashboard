@@ -1,6 +1,7 @@
 import DriverModel from '../models/DriverModel.js';
 import multer from 'multer';
 import path from 'path';
+import { Sequelize as sequelize } from 'sequelize';
 
 export const getDrivers=async(req,res)=>{
     try{
@@ -66,3 +67,15 @@ export const getDriverFromID = async (req, res) => {
         res.json({ meesage: error.message })
     }
 }
+export const getCountryDriver = async (req, res) => {
+  try {
+    const result = await DriverModel.findAll({
+      attributes: ['nationality', [sequelize.fn('COUNT', sequelize.col('*')), 'count']],
+      group: ['nationality'],
+    });
+
+    res.json(result);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
