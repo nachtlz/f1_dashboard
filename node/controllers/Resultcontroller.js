@@ -28,6 +28,7 @@ export const getResultFromDriver = async (req, res) => {
 
         // Formatear la respuesta para seleccionar solo puntos y nombre del circuito
         const formattedResults = results.map(result => ({
+            idRace: result.RACE.idRace,
             points: result.points,
             name: result.RACE.CIRCUIT.name,
         }));
@@ -51,6 +52,39 @@ export const getResultFromRace=async(req,res)=>{
         res.json(result);
     }catch(error){
         res.json({message : error.message});
+    }
+}
+
+export const getAllResultFromDriver = async (req, res) => {
+    try {
+        const results = await ResultModel.findAll({
+            include: [
+                {
+                    model: RaceModel,
+                    required: true,
+                    include: [
+                        {
+                            model: CircuitModel,
+                            required : true
+                        },
+                    ],
+                },
+            ],
+            where: { idDriver: req.params.idDriver },
+        });
+
+        // Formatear la respuesta para seleccionar solo puntos y nombre del circuito
+        const formattedResults = results.map(result => ({
+            points: result.points,
+            laps: result.laps,
+            status: result.status,
+            position: result.position,
+            name: result.RACE.CIRCUIT.name,
+        }));
+
+        res.json(formattedResults);
+    } catch (error) {
+        res.json({ message: error.message });
     }
 }
 

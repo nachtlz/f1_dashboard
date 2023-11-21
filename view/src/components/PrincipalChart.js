@@ -100,7 +100,6 @@ const PrincipalChart = () => {
       };
       
 
-
     function createChart(resultsData, racesData) {
         Highcharts.chart('container', {
 
