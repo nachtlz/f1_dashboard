@@ -6,6 +6,7 @@ const URI = 'http://localhost:8000/f1Dashboard/';
 const AddImage = () => {
     const [imageDriver, setImageDriver] = useState(null);
     const [imageCircuit, setImageCircuit] = useState(null);
+    const [imageCircuitReal,setImageCircuitReal]=useState(null);
     const [imageTeam, setImageTeam] = useState(null);
     const [drivers, setDrivers] = useState([]);
     const [circuits, setCircuits] = useState([]);
@@ -72,11 +73,23 @@ const AddImage = () => {
 
 
             try {
-                const res = await axios.post(URI + 'circuit/update', formData);
+                const res = await axios.post(URI + 'circuit/update/circuit', formData);
                 console.log(res);
             } catch (error) {
                 console.error('Error al subir la imagen:', error);
             }
+        }
+        if(imageCircuitReal){
+            const formData = new FormData();
+            formData.append('image', imageCircuitReal);
+            formData.append('idCircuit', idCircuit);
+            try {
+                const res = await axios.post(URI + 'circuit/update/real', formData);
+                console.log(res);
+            } catch (error) {
+                console.error('Error al subir la imagen:', error);
+            }
+
         }
     };
 
@@ -156,7 +169,15 @@ const AddImage = () => {
                             <p>Loading Circuit...</p>
                         )}
                         <div className="form-group">
-                            <label className="form-label">Image</label>
+                            <label className="form-label">Image Real</label>
+                            <input
+                                type="file"
+                                className="form-control"
+                                onChange={(e) => setImageCircuitReal(e.target.files[0])}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Image Circuit</label>
                             <input
                                 type="file"
                                 className="form-control"
