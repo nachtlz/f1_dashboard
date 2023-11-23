@@ -1,12 +1,11 @@
-# Título del Proyecto
+# F1 Dashboard
 
-_Acá va un párrafo que describa lo que es el proyecto_
+_El proyecto consiste en un dashboard interactivo que presenta información detallada y visualmente atractiva sobre la temporada 2020-2021 de la Fórmula 1. Proporciona a los usuarios una visión completa de las carreras,resultados, equipos y pilotos destacados durante esa temporada.
 
 ## Comenzando 🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Mira **Deployment** para conocer como desplegar el proyecto.
 
 
 ### Pre-requisitos 📋
@@ -14,31 +13,49 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 _Que cosas necesitas para instalar el software y como instalarlas_
 
 ```
-Da un ejemplo
+node
+npm
 ```
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+_A continuación se describen los pasos necesarios para descargar y ejecutar el proyecto
 
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
+_### Clonación del repositorio de GitHub
 
 ```
-hasta finalizar
+git clone https://github.com/nachtlz/f1_dashboard.git
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+_También se puede descargar directamente desde el zip que se ha subido en aula digital
 
-## Ejecutando las pruebas ⚙️
+_Una vez se ha instalado el proyecto, debemos instalar todas las dependencias necesarias, para ello una vez en la carpeta del proyecto
+_entramos en la carpeta del servidor e instalamos las dependencias para nuestro servidor Node.js
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
+```
+cd node
+npm install package.json
+```
+_A continuación, procedemos a instalar las dependencias del framework de react, para ello, salimos de la carpeta node
+```
+cd view
+npm install package.json
+```
 
+## Ejecutando el proyecto ⚙️
+
+_Primero, debemos tener iniciado el Gestor de base de datos, para ello debemos asegurarnos de que el gestor de base de datos está arrancado
+
+_Una vez arrancado el gestor, debemos arrancar nuestro servidor Node.js que se conectara con la base de datos
+```
+cd node
+npx nodemon app.js
+```
+_A continuación podemos proceder a iniciar la aplicación
+```
+cd view
+npm start
+```
 ### Analice las pruebas end-to-end 🔩
 
 _Explica que verifican estas pruebas y por qué_
