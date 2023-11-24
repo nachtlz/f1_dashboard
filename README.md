@@ -61,30 +61,23 @@ npm start
 
 A continuación listamos las herramientas que han hecho posible la creación del proyecto
 * [React](https://es.react.dev) - Biblioteca JavaScript utilizada como framework web para la creación de interfaces de usuario interactivas y eficientes en nuestro proyecto.
-* [Bootstrap](https://getbootstrap.com) - Marco de diseño front-end que ofrece herramientas y estilos para un desarrollo web receptivo y moderno
+* [Bootstrap](https://getbootstrap.com) - Marco de diseño front-end que ofrece herramientas y estilos para un desarrollo web responsive y moderno
 * [PHPMyAdmin](https://www.phpmyadmin.net) - Gestor de base de datos
 * [Node.js](https://nodejs.org/en) - Entorno de ejecución utilizado para la creación de la API REST que conecta la aplicación con la base de datos SQL."
 * [Git](https://github.com) - Utilizado para faciltiar el reparto de tareas entre el equipo
 
 ### Vista del Proyecto 🔩
 
-En la carpeta Node, encontramos el backend de la aplicación, que consiste en una API REST, ,a cual consulta infromación en la base de datos creada, para mostrara en la vista
-```
-Da un ejemplo
-```
+El patrón arquitectónico que hemos seguido es el Modelo, Vista, Controlador (MVC), donde el Modelo y el Controlador se encuentran en la carpeta 'node', y la Vista se encuentra en la carpeta 'View'.
 
-### Y las pruebas de estilo de codificación ⌨️
 
-_Explica que verifican estas pruebas y por qué_
+En la carpeta 'node', se aloja la lógica completa de nuestro backend, que se materializa como una API REST. Esta API se conecta a la base de datos para recuperar la información requerida por la vista en cada momento.
 
-```
-Da un ejemplo
-```
+La API, construida utilizando Node.js como mencionamos anteriormente, organiza su estructura en una carpeta llamada 'models', donde definimos la configuración de nuestras tablas en la base de datos que hemos creado. En la carpeta 'controllers', se encuentran todas las consultas que realizamos a la base de datos, con la programación de solo aquellos métodos que suministran información necesaria para la vista.
 
-## Despliegue 📦
+Dentro del archivo 'route.js', definimos las rutas junto con los tipos de consultas (POST, GET, DELETE, UPDATE), especificando dónde buscar la información. El archivo 'app.js' ejecutará la API.
 
-_Agrega notas adicionales sobre como hacer deploy_
-
+La vista se localiza en la carpeta 'view', donde definimos la lógica del front-end de nuestra aplicación. En la programación del front-end, hemos optado por utilizar el framework React junto con Bootstrap para crear una página elegante, accesible y responsive.
 
 
 ## Autores ✒️
@@ -93,7 +86,6 @@ Este proyecto, ha sido creado por :
 
 * **Juan Ignacio López Bohnhoff** - *Extracción de datos,Creación de la base de datos, API REST, Driver View, Home View* 
 * **Mateu Joan Perelló** - *Creación de la base de datos,Procesamiento de datos,API REST,Race View, Home View*
-
 
 
 ---
